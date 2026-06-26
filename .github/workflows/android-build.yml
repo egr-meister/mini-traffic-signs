@@ -42,6 +42,7 @@ jobs:
 
       - name: Align Expo dependency versions
         run: npx expo install --fix
+        continue-on-error: true
 
       - name: Run Expo Doctor
         run: npx expo-doctor
