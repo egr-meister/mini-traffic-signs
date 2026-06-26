@@ -63,11 +63,20 @@ function pickRandom(items) {
 }
 
 // Build "Find the Sign": choose the matching sign card from options.
-export function buildFindSignQuestion(difficulty) {
+// excludeSignId (optional) avoids repeating the previous question's sign.
+export function buildFindSignQuestion(difficulty, excludeSignId) {
   const signs = getAllSigns();
   const count = Math.min(getChoiceCountForDifficulty(difficulty), signs.length);
 
-  const target = pickRandom(signs) ?? getSignItem("stop");
+  // Prefer a target different from the previous one when possible.
+  let targetPool = signs;
+  if (excludeSignId && signs.length > 1) {
+    const filtered = signs.filter((s) => s.id !== excludeSignId);
+    if (filtered.length > 0) {
+      targetPool = filtered;
+    }
+  }
+  const target = pickRandom(targetPool) ?? getSignItem("stop");
 
   // Start with the correct sign, then add unique distractors.
   const chosen = [target];
@@ -96,13 +105,22 @@ export function buildFindSignQuestion(difficulty) {
 }
 
 // Build "Choose the Safe Action": pick the friendly safe action for the sign.
-export function buildSafeActionQuestion(difficulty) {
+// excludeSignId (optional) avoids repeating the previous question's situation.
+export function buildSafeActionQuestion(difficulty, excludeSignId) {
   const signs = getAllSigns();
-  const situation = pickRandom(SITUATION_ITEMS);
+
+  let situationPool = SITUATION_ITEMS;
+  if (excludeSignId && SITUATION_ITEMS.length > 1) {
+    const filtered = SITUATION_ITEMS.filter((s) => s?.signId !== excludeSignId);
+    if (filtered.length > 0) {
+      situationPool = filtered;
+    }
+  }
+  const situation = pickRandom(situationPool);
 
   // If no situation data, fall back to a Find the Sign question safely.
   if (!situation) {
-    return buildFindSignQuestion(difficulty);
+    return buildFindSignQuestion(difficulty, excludeSignId);
   }
 
   const correctSign = getSignItem(situation.signId);
@@ -142,12 +160,13 @@ export function buildSafeActionQuestion(difficulty) {
 }
 
 // Main entry: returns a fully-formed question for the requested mode.
-export function buildSignQuestion(gameMode, difficulty) {
+// excludeSignId (optional) prevents repeating the previous question's sign.
+export function buildSignQuestion(gameMode, difficulty, excludeSignId) {
   const mode = gameMode ?? GAME_MODES.FIND_SIGN;
   const level = difficulty ?? "easy";
 
   if (mode === GAME_MODES.SAFE_ACTION) {
-    return buildSafeActionQuestion(level);
+    return buildSafeActionQuestion(level, excludeSignId);
   }
-  return buildFindSignQuestion(level);
+  return buildFindSignQuestion(level, excludeSignId);
 }

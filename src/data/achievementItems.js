@@ -31,6 +31,24 @@ export const ACHIEVEMENT_ITEMS = [
     label: "Friendly Sign Star",
     emoji: "🏅",
     description: "Answer 20 questions correctly."
+  },
+  {
+    id: "bike_buddy_badge",
+    label: "Bike Buddy Badge",
+    emoji: "🚲",
+    description: "Answer 5 Bike Lane questions correctly."
+  },
+  {
+    id: "school_safe_badge",
+    label: "School Safe Badge",
+    emoji: "🏫",
+    description: "Answer 5 School Zone questions correctly."
+  },
+  {
+    id: "super_sign_star",
+    label: "Super Sign Star",
+    emoji: "🌟",
+    description: "Answer 50 questions correctly."
   }
 ];
 
@@ -47,6 +65,8 @@ export function getUnlockedAchievements(stats) {
   const stopCorrect = safeNum(stats?.bySign?.stop?.correct);
   const lightCorrect = safeNum(stats?.bySign?.traffic_light?.correct);
   const crosswalkCorrect = safeNum(stats?.bySign?.crosswalk?.correct);
+  const bikeCorrect = safeNum(stats?.bySign?.bike_lane?.correct);
+  const schoolCorrect = safeNum(stats?.bySign?.school_zone?.correct);
 
   if (totalCorrect >= 1) {
     unlocked.push("first_sign_badge");
@@ -62,6 +82,15 @@ export function getUnlockedAchievements(stats) {
   }
   if (totalCorrect >= 20) {
     unlocked.push("friendly_sign_star");
+  }
+  if (bikeCorrect >= 5) {
+    unlocked.push("bike_buddy_badge");
+  }
+  if (schoolCorrect >= 5) {
+    unlocked.push("school_safe_badge");
+  }
+  if (totalCorrect >= 50) {
+    unlocked.push("super_sign_star");
   }
 
   return unlocked;

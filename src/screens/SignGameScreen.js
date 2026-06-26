@@ -95,7 +95,8 @@ export default function SignGameScreen({ route, navigation }) {
     setAnswered(false);
     setWasCorrect(false);
     pickEncouragement();
-    setQuestion(buildSignQuestion(gameMode, difficulty));
+    // Pass the current sign so the next question does not repeat it.
+    setQuestion(buildSignQuestion(gameMode, difficulty, question?.signId));
   }
 
   const choices = question?.choices ?? [];

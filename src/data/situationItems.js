@@ -30,6 +30,62 @@ export const SITUATION_ITEMS = [
     prompt: "What should we do at a bus stop?",
     correctAction: "Wait near the bus stop.",
     emoji: "🚏"
+  },
+  {
+    id: "situation_pedestrian_walk",
+    signId: "pedestrian",
+    prompt: "What should we do on a walking path?",
+    correctAction: "Walk with a grown-up.",
+    emoji: "🚶"
+  },
+  {
+    id: "situation_bike_lane",
+    signId: "bike_lane",
+    prompt: "What should we do on a bike lane?",
+    correctAction: "Ride your bike here.",
+    emoji: "🚲"
+  },
+  {
+    id: "situation_school_zone",
+    signId: "school_zone",
+    prompt: "What should we do near a school?",
+    correctAction: "Go slowly near school.",
+    emoji: "🏫"
+  },
+  {
+    id: "situation_railway_crossing",
+    signId: "railway_crossing",
+    prompt: "What should we do at a railway crossing?",
+    correctAction: "Wait for the train with a grown-up.",
+    emoji: "🚂"
+  },
+  {
+    id: "situation_parking",
+    signId: "parking",
+    prompt: "What happens at a parking sign?",
+    correctAction: "Cars wait here.",
+    emoji: "🅿️"
+  },
+  {
+    id: "situation_roundabout",
+    signId: "roundabout",
+    prompt: "What should we do near a roundabout?",
+    correctAction: "Go slowly and look, with a grown-up.",
+    emoji: "🔄"
+  },
+  {
+    id: "situation_one_way",
+    signId: "one_way",
+    prompt: "What should we do at a one way sign?",
+    correctAction: "See which way cars go, with a grown-up.",
+    emoji: "➡️"
+  },
+  {
+    id: "situation_animal_crossing",
+    signId: "animal_crossing",
+    prompt: "What should we do at an animal crossing?",
+    correctAction: "Look for animals, with a grown-up.",
+    emoji: "🦆"
   }
 ];
 
