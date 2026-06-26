@@ -37,7 +37,6 @@
       "backgroundColor": "#FFF8EC"
     },
     "plugins": [
-      "expo-keep-awake",
       [
         "expo-build-properties",
         {
